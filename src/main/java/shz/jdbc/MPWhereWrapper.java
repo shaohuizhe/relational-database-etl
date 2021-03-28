@@ -1,4 +1,4 @@
-package shz.test.rde.page;
+package shz.jdbc;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;

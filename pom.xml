@@ -25,7 +25,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.mit</groupId>
+            <groupId>shz</groupId>
             <artifactId>jdbc</artifactId>
             <version>6.8.5</version>
             <scope>system</scope>

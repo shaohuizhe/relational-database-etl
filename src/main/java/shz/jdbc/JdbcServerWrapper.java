@@ -1,8 +1,8 @@
-package shz.test.rde.page;
+package shz.jdbc;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import shz.jdbc.JdbcServer;
-import shz.jdbc.PageInfo;
+import shz.jdbc.page.SpecialPageParam;
+import shz.jdbc.page.SpecialPageVo;
 import shz.jdbc.sql.MultiQueryWrapper;
 
 import java.util.List;
@@ -136,8 +136,8 @@ public class JdbcServerWrapper {
      * 多表分页查询（用于特殊查询及排序）
      */
     public final <DO, VO> SpecialPageVo<VO> page(Class<DO> cls, SpecialPageParam pageParam, Predicate<DO> filter,
-                                                                            BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select,
-                                                                            QueryWrapper<?> wrapper, Function<DO, VO> mapping) {
+                                                 BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select,
+                                                 QueryWrapper<?> wrapper, Function<DO, VO> mapping) {
         return jdbcServer.apply((ep, executor) -> SpecialPageVo.of(executor.page(
                 ep, cls, pageParam.toPageInfo(), null, filter, comparator,
                 1000, select, MPWhereWrapper.of(wrapper)
@@ -148,13 +148,13 @@ public class JdbcServerWrapper {
      * 多表分页查询（用于特殊查询及排序）
      */
     public final <DO, VO> SpecialPageVo<VO> page(Class<DO> cls, SpecialPageParam pageParam, Predicate<DO> filter,
-                                                                            BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select,
-                                                                            Function<DO, VO> mapping) {
+                                                 BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select,
+                                                 Function<DO, VO> mapping) {
         return page(cls, pageParam, filter, comparator, select, null, mapping);
     }
 
     public final <DO> SpecialPageVo<DO> page(Class<DO> cls, SpecialPageParam pageParam, Predicate<DO> filter,
-                                                                        BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select) {
+                                             BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select) {
         return page(cls, pageParam, filter, comparator, select, null, null);
     }
 
@@ -162,13 +162,13 @@ public class JdbcServerWrapper {
      * 多表分页查询（用于特殊排序）
      */
     public final <DO, VO> SpecialPageVo<VO> page(Class<DO> cls, SpecialPageParam pageParam,
-                                                                            BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select,
-                                                                            QueryWrapper<?> wrapper, Function<DO, VO> mapping) {
+                                                 BiFunction<DO, DO, Integer> comparator, MultiQueryWrapper.From select,
+                                                 QueryWrapper<?> wrapper, Function<DO, VO> mapping) {
         return page(cls, pageParam, null, comparator, select, wrapper, mapping);
     }
 
     public final <DO> SpecialPageVo<DO> page(Class<DO> cls, SpecialPageParam pageParam, BiFunction<DO, DO, Integer> comparator,
-                                                                        MultiQueryWrapper.From select, QueryWrapper<?> wrapper) {
+                                             MultiQueryWrapper.From select, QueryWrapper<?> wrapper) {
         return page(cls, pageParam, null, comparator, select, wrapper, null);
     }
 }

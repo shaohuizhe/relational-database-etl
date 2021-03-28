@@ -1,8 +1,79 @@
-# relational-database-etl
+# 冰冻三尺，非一日之寒
 
-##### 一怒之下自己写了个关系型数据库之间的ETL工具
+#### 关系型数据库之ETL
 
-##### 附加一个清晰简洁的demo（假设我们只关注这一个功能)
+```
+String sourceUrl = "jdbc:oracle:thin:@//xxx:1521/xxx";
+        Properties sourceProp = System.getProperties();
+        sourceProp.put("driverClassName", "oracle.jdbc.driver.OracleDriver");
+        sourceProp.put("user", "xxx");
+        sourceProp.put("password", "xxx");
+        sourceProp.put("remarksReporting", "true");
+
+        String sinkUrl = "jdbc:oracle:thin:@//xxx:1521/xxx";
+        Properties sinkProp = System.getProperties();
+        sinkProp.put("driverClassName", "oracle.jdbc.driver.OracleDriver");
+        sinkProp.put("user", "xxx");
+        sinkProp.put("password", "xxx");
+        sinkProp.put("remarksReporting", "true");
+
+
+        DBHelp.getDefaultMappingJdbcServer(sourceUrl, sourceProp,
+                //目标表与来源表字段映射
+                ToMap.get(16)
+                        .put("XXX", "XXX_XXX")
+                        .put("YYY", "YYY_YYY")
+                        .put("ZZZ", "ZZZ_ZZZ")
+                        .build()
+        ).copyTo(JdbcServer.of(new MyDefaultOracleJdbcExecutor(), sinkUrl, sinkProp), true, true,
+                //目标表实体类
+                Object.class,
+                //拷贝总行数，为0全表拷贝
+                0,
+                map -> {
+                    //获取源表XXX_XXX列
+                    Object obj = map.get("XXX_XXX");
+                    if (R.isBlank(obj)) return false;
+                    int xxx = Help.atoi(obj.toString());
+                    //过滤掉XXX_XXX不等于1的数据
+                    if (xxx != 1) return false;
+                    map.put("XXX_XXX", xxx);
+
+                    obj = map.get("YYY_YYY");
+                    if (R.isBlank(obj)) return false;
+                    int yyy = Help.atoi(obj.toString());
+                    if (yyy != 1
+                            && yyy != 2
+                            && yyy != 3
+                            && yyy != 4) return false;
+                    map.put("YYY_YYY", yyy);
+
+                    obj = map.get("ZZZ_ZZZ");
+                    if (R.isBlank(obj)) return false;
+                    String zzz = obj.toString();
+                    //将源库的男转为1，女转为2，其他转为0
+                    switch (zzz) {
+                        case "男":
+                            map.put("ZZZ_ZZZ", 1);
+                            break;
+                        case "女":
+                            map.put("ZZZ_ZZZ", 2);
+                            break;
+                        default:
+                            map.put("ZZZ_ZZZ", 0);
+                    }
+                    return true;
+                },
+                info -> {
+                    //实体类的过滤器
+                    return true;
+                },
+                //每批次获取条数
+                2000,
+                //来源模式及表名
+                TNP.of().tableSchem("模式").tableName("表名")
+        );
+```
 
 
 

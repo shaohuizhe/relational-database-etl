@@ -1,4 +1,4 @@
-package shz.test.rde.page;
+package shz.jdbc.page;
 
 import lombok.*;
 import shz.jdbc.PageInfo;
