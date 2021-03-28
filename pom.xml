@@ -19,17 +19,23 @@
         <dependency>
             <groupId>shz</groupId>
             <artifactId>as</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/as-2.5.3.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/as-2.5.4.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>com.mit</groupId>
             <artifactId>jdbc</artifactId>
-            <version>6.2</version>
+            <version>6.8.5</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/jdbc-6.2.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/jdbc-6.8.5.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.2</version>
         </dependency>
     </dependencies>
 </project>

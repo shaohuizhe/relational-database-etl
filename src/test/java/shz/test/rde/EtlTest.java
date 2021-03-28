@@ -1,8 +1,8 @@
 package shz.test.rde;
 
-import com.mit.jdbc.JdbcServer;
-import com.mit.jdbc.TNP;
-import com.mit.jdbc.db.DefaultOracleJdbcExecutor;
+import shz.jdbc.JdbcServer;
+import shz.jdbc.TNP;
+import shz.jdbc.db.DefaultOracleJdbcExecutor;
 import shz.p.Validator;
 
 import java.lang.reflect.Field;
@@ -59,6 +59,7 @@ public class EtlTest {
                 KeyAreaInfo.class,
                 //拷贝数据量，为0则全表拷贝
                 0,
+                null,
                 //若为null则不过滤数据原样拷贝
                 t -> {
                     //TODO 进行数据的过滤及转换
