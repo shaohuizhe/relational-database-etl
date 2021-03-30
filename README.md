@@ -4,14 +4,14 @@
 
 ```
 String sourceUrl = "jdbc:oracle:thin:@//xxx:1521/xxx";
-        Properties sourceProp = System.getProperties();
+        Properties sourceProp = new Properties();
         sourceProp.put("driverClassName", "oracle.jdbc.driver.OracleDriver");
         sourceProp.put("user", "xxx");
         sourceProp.put("password", "xxx");
         sourceProp.put("remarksReporting", "true");
 
         String sinkUrl = "jdbc:oracle:thin:@//xxx:1521/xxx";
-        Properties sinkProp = System.getProperties();
+        Properties sinkProp = new Properties();
         sinkProp.put("driverClassName", "oracle.jdbc.driver.OracleDriver");
         sinkProp.put("user", "xxx");
         sinkProp.put("password", "xxx");
